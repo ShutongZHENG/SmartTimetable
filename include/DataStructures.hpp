@@ -4,10 +4,10 @@ struct Course {
     std::string name;
 };
 
-struct Student {
-    std::string name;
-    std::vector<Course> courses;
-};
+// struct Student {
+//     std::string name;
+//     std::vector<Course> courses;
+// };
 struct Lecturer {
     std::string name;
     std::vector<Course> courses;
