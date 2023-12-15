@@ -47,8 +47,11 @@ int main(int, char**){
 
     Graph graph(subjects, lecturers, courses, sameLecturers, laboratories, classPerWeekOfsubjects, classrooms, timeSlots);
     
-    graph.printGraph();
+   //graph.printGraph();
     
+    graph.generateClassSchedule();
+
+    graph.printGraph();
     return 0;
 
 }

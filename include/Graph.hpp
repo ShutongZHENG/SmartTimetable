@@ -23,6 +23,8 @@ struct Node
    int nodeID;
    int nbOfSubjects = 0;
    int NoClass = 0;
+   int NoLecturer = -1;
+   
    std::string name;
    TypeOfSubject type;
 };
@@ -33,11 +35,16 @@ private:
     /* data */
      std::vector<Node> nodes;
      std::vector<Edge> edges;
+     std::vector<int> labRooms;
+     std::vector<int> Rooms;
+     ClassSchedule* classSchedule;
+     std::vector<sameLecturer> sameLecturers;
 
 private:
     void computeDegree();
-    bool compareNodes(const Node& a, const Node& b);
-    ClassSchedule* classSchedule;
+    static bool compareNodes(const Node& a, const Node& b);
+    std::vector<int> findSameLecturerSubjects(const int& subjectID);
+    std::vector<int> findRoomDaySlot(const TypeOfSubject& typeOfSubject , const int& noClass, const std::pair<int, int>& DaySlot, const std::vector<int>& sameLecturerSubjects);
 public:
     Graph(
         std::vector<Subject> subjects, std::vector<Lecturer> lecturers, std::vector<Course> courses, std::vector<sameLecturer> sameLecturers, 

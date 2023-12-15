@@ -55,23 +55,6 @@ struct TimeSlot {
 
 
 
-
-
-/*
-NUM_CLASSES(numClasses) {
-        subjectAllocations = new int*[NUM_DAYS];
-        roomAllocations = new int*[NUM_DAYS];
-        for (int i = 0; i < NUM_DAYS; ++i) {
-            subjectAllocations[i] = new int[NUM_SLOTS] ;
-            roomAllocations[i] = new int[NUM_SLOTS];
-            for (int j = 0; j < NUM_SLOTS; ++j) {
-            subjectAllocations[i][j] = -1; 
-            roomAllocations[i][j] = -1;
-            }
-        }
-    }
-
-*/
 struct ClassSchedule {
     const int NUM_DAYS;
     const int NUM_SLOTS;
@@ -95,6 +78,38 @@ struct ClassSchedule {
             }
         }
     }
+
+ std::pair<int, int> findAvailableSlot(const int& classNumber) {
+    if (classNumber >= NUM_CLASSES || classNumber < 0) {
+        throw std::invalid_argument("Invalid class number");
+    }
+
+    for (int day = NUM_DAYS - 1; day >= 0; --day) {
+        for (int slot = NUM_SLOTS - 1; slot >= 0; --slot) {
+            if (subjectAllocations[classNumber][day][slot] == -1 && roomAllocations[classNumber][day][slot] == -1) {
+                int preDay = (slot == 0 && day > 0) ? day - 1 : day;
+                int preSlot = (slot == 0 && day > 0) ? NUM_SLOTS - 1 : (slot > 0 ? slot - 1 : 0);
+
+                if (day > 0 || slot > 0) { // Check if not the first slot of the first day
+                    if (subjectAllocations[classNumber][preDay][preSlot] != -1 && roomAllocations[classNumber][preDay][preSlot] != -1) {
+                        return {day, slot};
+                    }
+                } else {
+                    return {0, 0}; // First slot of first day is always available if empty
+                }
+            }
+        }
+    }
+
+    // Handle the case when no slot is found
+    return {-1, -1}; // Or throw an exception or use another appropriate way to indicate no available slot
+}
+
+
+                        
+
+
+
 
     ~ClassSchedule() {
         for (int i = 0; i < NUM_CLASSES; ++i) {

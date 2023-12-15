@@ -58,7 +58,9 @@
         "algorithm": "cpp",
         "map": "cpp",
         "__tree": "cpp",
-        "set": "cpp"
+        "set": "cpp",
+        "unordered_set": "cpp",
+        "queue": "cpp"
     },
     "C_Cpp.errorSquiggles": "disabled"
 }
