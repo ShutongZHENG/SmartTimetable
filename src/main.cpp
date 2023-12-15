@@ -27,7 +27,7 @@ int main(int, char**){
 
     vector<Classroom> classrooms = {Classroom{1}, Classroom{2}, Classroom{3}, Classroom{4}, Classroom{5}, Classroom{6} };
     
-    vector<Laboratory> laboratories = {Laboratory{1, 4}, Laboratory{2, 5}, Laboratory{3, 6}};
+    vector<Laboratory> laboratories = {Laboratory{1, 4}};
     
     vector<Course> courses = {
         Course{1, {1, 2, 3}}, Course{2, {4, 5, 6}}, Course{3, {7, 8, 9}},
@@ -47,7 +47,7 @@ int main(int, char**){
 
     Graph graph(subjects, lecturers, courses, sameLecturers, laboratories, classPerWeekOfsubjects, classrooms, timeSlots);
     
-   //graph.printGraph();
+   graph.printGraph();
     
     graph.generateClassSchedule();
 

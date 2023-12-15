@@ -70,7 +70,6 @@ Graph:: Graph(
     for (int i = 0; i < laboratories.size(); i++)
     {
         labRooms.push_back(laboratories[i].roomID);
-        labRooms.push_back(laboratories[i].labID);
     }
 
     for (int i = 0; i < classrooms.size(); i++)
