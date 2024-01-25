@@ -1,7 +1,6 @@
 #include "Graph.hpp"
 #include <iostream>
 #include <algorithm>
-#include <map>
 #include <queue>
 Graph:: Graph(
         std::vector<Subject> subjects, std::vector<Lecturer> lecturers, std::vector<Course> courses, 
@@ -116,7 +115,9 @@ void Graph::printGraph()
        {
               for (int k = 0; k < this->classSchedule->NUM_SLOTS; k++)
               {
-                std::cout << this->classSchedule->roomAllocations[i][j][k] << " ";
+                if(this->classSchedule->roomAllocations[i][j][k] == -1) std::cout << "-1 ";
+                else
+                std::cout << "R" <<this->classSchedule->roomAllocations[i][j][k] << " ";
               }
                 std::cout << std::endl;
        }
@@ -125,14 +126,22 @@ void Graph::printGraph()
   
 
 }
+// chaque node(suject), on a ID, le prof, No class, temps, room. (the base of Degree)
+// si les cours ont le meme prof, on doit augmenter le degree pour ces cours.  le cours "Phy" a Porf A , et le cours "Math" a aussi prof A. 
+// les nodes de "phy" et "Math " doit agumenter leurs degree. (+1) 
+// les cours de class 1  <-----constraint -----> les cours de class 2. // Dans les graphe, c'est  les edges
+// un cours pour les autres cours( meme class ). c'est aussi un constraint. parce que,  le meme temps, on just peut suivi un cours .
+// si les nodes a meme degree, on doit chosisir les TypeOfSubject (practical > lecture), c'est a dire. le degree de node va agmenter. (practical +3, lecture +1, tutorial +2)
+
+// on doir tire les list de nodes selon le degree. (max to min). c'est just pour les cours
 
 
 void Graph::computeDegree()
 {
     for (int i = 0; i < edges.size(); i++)
     {
-        nodes[edges[i].getSrc()].degree++;
-        nodes[edges[i].getDest()].degree++;
+            nodes[edges[i].getSrc()].degree++;
+            nodes[edges[i].getDest()].degree++;
     }
 }
  

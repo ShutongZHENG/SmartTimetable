@@ -59,9 +59,14 @@ struct ClassSchedule {
     const int NUM_DAYS;
     const int NUM_SLOTS;
     const int NUM_CLASSES;
-    int*** subjectAllocations;
+    int*** subjectAllocations; //list of 
     int*** roomAllocations;
 
+    //constructor sur struct classSchedule
+    //pour initaliser  les tableaux de 3D
+
+
+    
     ClassSchedule(int numSlots, int numClasses) : NUM_DAYS(5), NUM_SLOTS(numSlots), NUM_CLASSES(numClasses) {
         subjectAllocations = new int**[NUM_CLASSES];
         roomAllocations = new int**[NUM_CLASSES];
@@ -90,25 +95,25 @@ struct ClassSchedule {
                 int preDay = (slot == 0 && day > 0) ? day - 1 : day;
                 int preSlot = (slot == 0 && day > 0) ? NUM_SLOTS - 1 : (slot > 0 ? slot - 1 : 0);
 
-                if (day > 0 || slot > 0) { // Check if not the first slot of the first day
+                if (day > 0 || slot > 0) { 
                     if (subjectAllocations[classNumber][preDay][preSlot] != -1 && roomAllocations[classNumber][preDay][preSlot] != -1) {
                         return {day, slot};
                     }
                 } else {
-                    return {0, 0}; // First slot of first day is always available if empty
-                }
+                    return {0, 0};
             }
         }
     }
-
-    // Handle the case when no slot is found
-    return {-1, -1}; // Or throw an exception or use another appropriate way to indicate no available slot
+    }
+    return {-1, -1};
 }
+    
+
 
 
                         
 
-
+//
 
 
     ~ClassSchedule() {
